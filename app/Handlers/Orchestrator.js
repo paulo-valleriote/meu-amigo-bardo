@@ -19,7 +19,7 @@ const Orchestrator = async (event, context, cb) => {
 
   const action = await getAction({ actionName: payload.action })
   const messages = await action.run({ payload })
-
+ 
   const responseDialog = {
     fulfillmentMessages: [...messages.map(message => ({text: {text: [message]}}))]
   }
