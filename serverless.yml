@@ -3,8 +3,6 @@ service: aws-bardo-amigo-api
 provider:
   name: aws
   runtime: nodejs18.x
-  environment:
-    OPENAI_KEY: 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
 
 functions:
   hello:
