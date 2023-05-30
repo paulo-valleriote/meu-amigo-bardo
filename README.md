@@ -33,6 +33,22 @@ Algumas coisas podem vir a incrementar este pequeno projeto no futuro, sendo ela
 
 _____
 
+### Para iniciar a aplicação
+
+Você <b>DEVE</b> ter o [Serverless](https://www.serverless.com/framework#monitoring) e o [Node.js](https://nodejs.org/en) instalados na sua máquina.
+
+Tendo os dois requisitos <b>obrigatórios</b>, agora você precisa instalar as dependências com:
+
+    npm install ou yarn install
+
+Em seguida você já pode iniciar a aplicação com:
+
+    serverless offline
+
+_____
+
+### Exemplos
+
 #### Uma rolagem
 
                                                             "Role um dado"
