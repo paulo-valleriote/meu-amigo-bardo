@@ -1,106 +1,81 @@
-<!--
-title: 'Serverless Framework Node Express API on AWS'
-description: 'This template demonstrates how to develop and deploy a simple Node Express API running on AWS Lambda using the traditional Serverless Framework.'
-layout: Doc
-framework: v3
-platform: AWS
-language: nodeJS
-priority: 1
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
+# Amigo Bardo  
 
-# Serverless Framework Node Express API on AWS
+## Chatbot
 
-This template demonstrates how to develop and deploy a simple Node Express API service running on AWS Lambda using the traditional Serverless Framework.
+Um projeto de Chatbot construído com Serverless, Dialogflow e JavaScript. (Projeto com fins acadêmicos)
 
-## Anatomy of the template
+_____
 
-This template configures a single function, `api`, which is responsible for handling all incoming requests thanks to the `httpApi` event. To learn more about `httpApi` event configuration options, please refer to [httpApi event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/). As the event is configured in a way to accept all incoming requests, `express` framework is responsible for routing and handling requests internally. Implementation takes advantage of `serverless-http` package, which allows you to wrap existing `express` applications. To learn more about `serverless-http`, please refer to corresponding [GitHub repository](https://github.com/dougmoscrop/serverless-http).
+### Objetivo
 
-## Usage
+Trazer funcionalidades que jogadores de rpg normalmente utilizam algum site na internet para usar para um bot no telegram, facilitando o acesso e deixando a necessidade a algumas mensagens de distância
 
-### Deployment
+### Funcionalidades Atuais
 
-Install dependencies with:
+Atualmente é possível utilizar o bot para:
 
-```
-npm install
-```
+- Pedir rolagens de dados e receber um resultado aleatório baseado em:
+  - Número de dados
+  - Quantidade de lados do dado
+  - Modificador que deve ser aplicado
+- Consultar como funcionam os pontos de vida de determinada classe
+- Gerar os 6 atributos para o jogador ( No modelo 4d6, retirando o menor resultado )
 
-and then deploy with:
+### Funcionalidades ainda não implementadas
 
-```
-serverless deploy
-```
+Algumas coisas podem vir a incrementar este pequeno projeto no futuro, sendo elas:
 
-After running deploy, you should see output similar to:
+- Consultas mais complexas
+  - Equipamentos, armas e armaduras
+  - Classes e Raças
+- Geração de atributos baseada em classe ( Quais devem ser os maiores )
+- Ajuda com criação de histórias
 
-```bash
-Deploying aws-node-express-api-project to stage dev (us-east-1)
+_____
 
-✔ Service deployed to stack aws-node-express-api-project-dev (196s)
+#### Uma rolagem
 
-endpoint: ANY - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com
-functions:
-  api: aws-node-express-api-project-dev-api (766 kB)
-```
+                                                            "Role um dado"
+    "Qual dado?"
+                                                                     "d20"
+    "O resultado da sua rolagem foi d20 = 12"
 
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [`httpApi` event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/).
+#### Uma rolagem com modificador
 
-### Invocation
+                                                            "Role um dado"
+    "Qual dado?"
+                                                                 "d20 + 8"
+    "O resultado da sua rolagem foi d20 + 8 = 14"
 
-After successful deployment, you can call the created application via HTTP:
+#### Duas rolagens
 
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/
-```
+                                                            "Role um dado"
+    "Qual dado?"
+                                                                "Dois d20"
+    "O resultado das suas rolagens foram 8, 12"
 
-Which should result in the following response:
+#### Gerar atributos
 
-```
-{"message":"Hello from root!"}
-```
+                                                      "Gere meus atributos"
 
-Calling the `/hello` path with:
+    "Seus atributos são: 20 - 17 - 16 - 16 - 13 - 17"
 
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/hello
-```
+#### Pontos de vida
 
-Should result in the following response:
+                                        "Quais os pontos de vida do bardo?"
 
-```bash
-{"message":"Hello from path!"}
-```
+    "O dado de vida da classe escolhida é d8, caso você
+    esteja no nível um, seus pontos de vida serão:
+    
+    8 + Seu valor de Constituição 
 
-If you try to invoke a path or method that does not have a configured handler, e.g. with:
+    Caso seja posterior ao nível 1º você terá: 
 
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/nonexistent
-```
+    um d8 = +4 pontos de vida
 
-You should receive the following response:
+_____
 
-```bash
-{"error":"Not Found"}
-```
+### Obrigado por ler até aqui!
 
-### Local development
+#### Projeto realizado por [Paulo Valleriote](https://www.linkedin.com/in/paulovalleriote/)
 
-It is also possible to emulate API Gateway and Lambda locally by using `serverless-offline` plugin. In order to do that, execute the following command:
-
-```bash
-serverless plugin install -n serverless-offline
-```
-
-It will add the `serverless-offline` plugin to `devDependencies` in `package.json` file as well as will add it to `plugins` in `serverless.yml`.
-
-After installation, you can start local emulation with:
-
-```
-serverless offline
-```
-
-To learn more about the capabilities of `serverless-offline`, please refer to its [GitHub repository](https://github.com/dherault/serverless-offline).
