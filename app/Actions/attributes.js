@@ -2,16 +2,17 @@
 const attributesAction = async () => {
   const attributes = []
 
-  const rollDice = () => Math.floor(Math.random() * 6) + 1
+  const rollDice = () => Math.ceil(Math.random() * 6) + 1
 
   for (i = 0; i < 6; i++) {
     const rolledDices = []
-    for (j = 0; j <= 4; j++) {
+    for (j = 0; j < 4; j++) {
       rolledDices.push(rollDice())
     }
 
     const smallestValueIndex = rolledDices.indexOf(Math.min(rolledDices))
-    const finalValue = rolledDices.reduce((previousDice, currentDice, index) => index !== smallestValueIndex && previousDice + currentDice)
+    rolledDices.splice(smallestValueIndex, 1)
+    const finalValue = rolledDices.reduce((previousRoll, currentRoll) => previousRoll+currentRoll)
 
     attributes.push(finalValue)
   }
